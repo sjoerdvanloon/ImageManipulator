@@ -1,34 +1,20 @@
 ﻿namespace ImageManipulator;
 
-public class Manipulator
+public class ImageLoader
 {
-    private ManipulatorContext _currentContext;
-    public Manipulator()
+    public ImageLoader()
     {
       
     }
-    
-    public Manipulator LoadBase64(string base64)
+
+    public byte[] LoadBase64(string base64)
     {
-        _currentContext = new();
-        return this;
+        return null ;
     }
 
-    public Manipulator RoundCorners()
+    public byte[] LoadByBytes(byte[] image)
     {
         return null;
     }
-
-    public string SaveToBase64()
-    {
-        return "";
-    }
-    
-    
 }
 
-public class ManipulatorContext
-{
-    public byte[] InitialData { get; set; }
-    public byte[] CurrentData { get; set; }
-}
