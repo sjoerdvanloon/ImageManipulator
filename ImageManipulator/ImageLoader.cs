@@ -9,12 +9,14 @@ public class ImageLoader
 
     public byte[] LoadBase64(string base64)
     {
-        return null ;
+        if (base64 == null) throw new ArgumentNullException(nameof(base64));
+        return Convert.FromBase64String(base64) ;
     }
 
     public byte[] LoadByBytes(byte[] image)
     {
-        return null;
+        if (image == null) throw new ArgumentNullException(nameof(image));
+        return image.ToArray();
     }
 }
 
