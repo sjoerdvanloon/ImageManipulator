@@ -5,7 +5,6 @@ namespace ImageManipulator;
 public class Tests
 {
     private ImageSaver _imageSaver;
-    private ImageLoader _imageLoader;
     private ImageManipulatorFactory _imageManipulatorFactory;
 
     [SetUp]
@@ -20,8 +19,15 @@ public class Tests
         var container = serviceCollection.BuildServiceProvider();
 
         _imageManipulatorFactory = container.GetRequiredService<ImageManipulatorFactory>();
+        _imageSaver = container.GetRequiredService<ImageSaver>();
     }
-
+    private byte[] SaveImageManipulator(IImageManipulator imageManipulator)
+    {
+        if (imageManipulator == null) throw new ArgumentNullException(nameof(imageManipulator));
+        var data = imageManipulator.GetImageData();
+        return _imageSaver.ToByteArray(data.Data);
+    }
+    
     [Test]
     public void Load_WithBase64_ShouldLoad()
     {
@@ -31,7 +37,7 @@ public class Tests
                 .ResizeWhen((image) => image.Size.Height != 600)
                 .RoundCorners();
         
-            _imageManipulatorFactory.SaveImageManipulator(imageManipulator);
+            SaveImageManipulator(imageManipulator);
 
 
             // _imageManipulator
