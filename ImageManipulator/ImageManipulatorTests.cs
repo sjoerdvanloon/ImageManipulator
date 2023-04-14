@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace ImageManipulator;
 
-public class Tests
+public class ImageManipulatorTests
 {
     private ImageSaver _imageSaver;
     private ImageManipulatorFactory _imageManipulatorFactory;
@@ -20,6 +20,7 @@ public class Tests
 
         _imageManipulatorFactory = container.GetRequiredService<ImageManipulatorFactory>();
         _imageSaver = container.GetRequiredService<ImageSaver>();
+         
     }
     private byte[] SaveImageManipulator(IImageManipulator imageManipulator)
     {
@@ -31,7 +32,7 @@ public class Tests
     [Test]
     public void Load_WithBase64_ShouldLoad()
     {
-        var imageManipulator = _imageManipulatorFactory.CreateImageManipulator(TestData.InputImage);
+        var imageManipulator = _imageManipulatorFactory.CreateImageManipulatorWithBase64(TestData.InputImage);
         
             imageManipulator
                 .ResizeWhen((image) => image.Size.Height != 600)
